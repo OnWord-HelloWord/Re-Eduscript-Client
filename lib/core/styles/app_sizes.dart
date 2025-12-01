@@ -32,18 +32,20 @@ class AppSizes {
 
   // < 시작 화면 >
   // [폰트]
-  static const double startTitleFontSize = 110.0;       // 제목
-  static const double startSubTitleFontSize = 25.0;     // 소제목
+  static const double startTitleFontSize = 110.0;      // 제목
+  static const double startSubTitleFontSize = 25.0;    // 소제목
+  static const double startTitleSpacing = 2.0;         // 제목 글 간격
+  static const double startSubTitleSpacing = 0.5;      // 소제목 글 간격
 
   // [버튼] 시작 버튼
   static const double startButtonWidth = 200.0;         // 너비
   static const double startButtonElevation = 8.0;       // 입체감
-  static const double startButtonLetterSpacing = 1.0;   // 글 간격
+  static const double startButtonSpacing = 1.0;         // 글 간격
 
   // [버튼] 모드 선택 버튼
   static const double modeButtonWidth = 220.0;          // 너비
   static const double modeButtonElevation = 6.0;        // 입체감
-  static const double modeButtonLetterSpacing = 0.5;    // 글 간격
+  static const double modeButtonSpacing = 0.5;          // 글 간격
 
   // [버튼] 공통 스타일 (시작 & 모드)
   static const double baseButtonHeight = 50.0;          // 높이

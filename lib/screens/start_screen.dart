@@ -1,15 +1,13 @@
 // [lib/screens/start_screen.dart]
-// 시작 화면 -> 모드 선택
+// [screen] 시작 화면 -> 모드 선택
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:re_eduscript_client/core/styles/app_colors.dart';
-import 'package:re_eduscript_client/core/styles/app_sizes.dart';  //
-
-
-import 'package:re_eduscript_client/core/constants/app_enums.dart';      // [이넘] 모드
-import 'package:re_eduscript_client/providers/mode_provider.dart';       // [프로바이더] 모드
-import 'package:re_eduscript_client/screens/preview_setup_screen.dart';  // [스크린] 대기 화면
-import 'package:re_eduscript_client/widgets/mode_button_section.dart';   // [위젯] 버튼 선택 위젯
+import 'package:re_eduscript_client/core/styles/app_colors.dart';        // [core] 색상
+import 'package:re_eduscript_client/core/styles/app_sizes.dart';         // [core] 사이즈
+import 'package:re_eduscript_client/core/constants/app_enums.dart';      // [core] 모드
+import 'package:re_eduscript_client/providers/mode_provider.dart';       // [providers] 모드
+import 'package:re_eduscript_client/screens/preview_setup_screen.dart';  // [screens] 대기 화면
+import 'package:re_eduscript_client/widgets/mode_button_section.dart';   // [widgets] 버튼 선택 위젯
 
 class StartScreen extends StatefulWidget {
   const StartScreen({super.key});
@@ -21,19 +19,19 @@ class StartScreen extends StatefulWidget {
 class _StartScreenState extends State<StartScreen> {
   // 0) 모드 선택 출력 여부
   bool _isModeSelectionVisible = false;
-  // 1) 모드 선택 버튼 출력
+  // 1) 모드 선택 섹션 출력 (true)
   void _setModeSelectionVisible() {
     setState(() {
       _isModeSelectionVisible = true;
     });
   }
-  // 2) 모드 선택 버튼 지우기
+  // 2) 모드 선택 섹션 지우기 (false)
   void _hideModeSelection() {
     setState(() {
       _isModeSelectionVisible = false;
     });
   }
-  // 3) 모드 선택하기
+  // 3) 모드 할당, 화면 이동
   void _onModeSelected(Mode mode) {
     // [프로바이더] 모드 할당
     Provider.of<ModeProvider>(context, listen: false).setMode(mode);
@@ -57,17 +55,17 @@ class _StartScreenState extends State<StartScreen> {
 
         child: Padding(
           padding: EdgeInsets.all(AppSizes.smallPadding),
-          child:  Stack(
+          child: Stack(
               children: [
                 Column(
                   children: [
                     // 상단 여백
                     SizedBox(height: screenHeight * 0.15),
 
-                    // [1] 제목 섹션 (모드 선택 시 상단으로 이동)
+                    // [1] 제목 섹션
                     _isModeSelectionVisible
-                        ? _buildModeTitleSection()   // [2] 모드 선택 화면
-                        : _buildStartTitleSection(), // [1] 시작 화면
+                        ? _buildModeTitle()   // [1-2] 모드 선택 화면 제목
+                        : _buildStartTitle(), // [1-1] 시작 화면 제목
 
                     // 중간 여백
                     SizedBox(height: screenHeight * 0.15),
@@ -81,6 +79,7 @@ class _StartScreenState extends State<StartScreen> {
                     ),
                   ],
                 ),
+                // [3] 뒤로 가기 버튼 (모드 선택 -> 시작 화면)
                 _isModeSelectionVisible
                     ? IconButton(
                   onPressed: _hideModeSelection,
@@ -97,63 +96,45 @@ class _StartScreenState extends State<StartScreen> {
     );
   }
 
-  // [1] 시작 화면 (제목 + 소제목)
-  Widget _buildStartTitleSection() {
+  // [1] 제목 섹션 (제목 + 소제목)
+  Widget _buildTitleSection(String subtitleText) {
     return Center(
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
+          // 1) 제목 (공통)
           Text(
             'EduScript',
             style: TextStyle(
               fontSize: AppSizes.startTitleFontSize,
               fontWeight: FontWeight.bold,
-              color: AppColors.blueColor1,
-              letterSpacing: 2.0,
+              color: AppColors.bluePrimaryColor,
+              letterSpacing: AppSizes.startTitleSpacing,
             ),
           ),
-          SizedBox(height: 20),
+          SizedBox(height: 20), // 여백
+          // 2) 소제목
           Text(
-            'AI 기반 실시간 스크립트 생성',
-            style: TextStyle(
-              fontWeight: FontWeight.w500,
-              fontSize: AppSizes.startSubTitleFontSize,
-              color: AppColors.greyFontColor,
-              letterSpacing: 0.5,
-            ),
+              subtitleText, // 전달 받은 매개변수 (소제목)
+              style: TextStyle(
+                fontWeight: FontWeight.w500,
+                fontSize: AppSizes.startSubTitleFontSize,
+                color: AppColors.greyFontColor,
+                letterSpacing: AppSizes.startSubTitleSpacing,
+              )
           ),
         ],
       ),
     );
   }
 
-  // [2] 모드 선택 화면 (제목 + 소제목)
-  Widget _buildModeTitleSection() {
-    return Center(
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Text(
-            'EduScript',
-            style: TextStyle(
-              fontSize: AppSizes.startTitleFontSize,
-              fontWeight: FontWeight.bold,
-              color: AppColors.blueColor1,
-              letterSpacing: 2.0,
-            ),
-          ),
-          SizedBox(height: 20),
-          Text(
-            '모드를 선택하세요',
-            style: TextStyle(
-              fontWeight: FontWeight.w500,
-              fontSize: AppSizes.startSubTitleFontSize,
-              color: AppColors.greyFontColor,
-              letterSpacing: 0.5,
-            ),
-          ),
-        ],
-      ),
-    );
+  // [1-1] 시작 화면 제목
+  Widget _buildStartTitle() {
+    return _buildTitleSection('AI 기반 실시간 스크립트 생성');
+  }
+
+  // [1-2] 모드 선택 화면 제목
+  Widget _buildModeTitle() {
+    return _buildTitleSection('모드를 선택하세요');
   }
 }

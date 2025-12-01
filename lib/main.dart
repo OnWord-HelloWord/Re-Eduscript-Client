@@ -9,7 +9,7 @@ import 'core/styles/app_sizes.dart';                                // [AppSizes
 import 'package:re_eduscript_client/screens/start_screen.dart';     // [Screen] 시작 창
 
 void main() async {
-  // [1] 창 관리자 관련 (Window Manager)
+  // [창 관리자 관련] (Window Manager)
   // 1) 초기화
   WidgetsFlutterBinding.ensureInitialized(); // 채널 초기화
   await windowManager.ensureInitialized();   // 창 관리자 초기화
@@ -30,6 +30,7 @@ void main() async {
   });
 
   runApp(
+    // [프로바이더 등록]
       MultiProvider(
         providers: [
           ChangeNotifierProvider(create: (context) => ModeProvider(),)

@@ -30,7 +30,7 @@ class AppElevatedButton extends StatelessWidget {
     // 1) 버튼 디자인
     final ButtonStyle buttonStyle = ElevatedButton.styleFrom(
       backgroundColor: AppColors.blueButtonColor, // 배경색
-      foregroundColor: AppColors.whiteColor,  // 폰트색
+      foregroundColor: AppColors.whiteColor,      // 폰트색
       shadowColor: AppColors.buttonShadowColor,   // 그림자
       shape: RoundedRectangleBorder(
         borderRadius: AppSizes.baseButtonRadius,  // 둥글기

@@ -43,7 +43,7 @@ class ModeButtonSection extends StatelessWidget {
             text: "시작하기",
             width: AppSizes.startButtonWidth,
             elevation: AppSizes.startButtonElevation,
-            letterSpacing: AppSizes.startButtonLetterSpacing),
+            letterSpacing: AppSizes.startButtonSpacing),
         )
       ],
     );
@@ -63,7 +63,7 @@ class ModeButtonSection extends StatelessWidget {
               width: AppSizes.modeButtonWidth,
               elevation: AppSizes.modeButtonElevation,
               icon: Icons.school,
-              letterSpacing: AppSizes.modeButtonLetterSpacing),
+              letterSpacing: AppSizes.modeButtonSpacing),
         ),
 
         SizedBox(height: 10),
@@ -77,7 +77,7 @@ class ModeButtonSection extends StatelessWidget {
               width: AppSizes.modeButtonWidth,
               elevation: AppSizes.modeButtonElevation,
               icon: Icons.groups,
-              letterSpacing: AppSizes.modeButtonLetterSpacing),
+              letterSpacing: AppSizes.modeButtonSpacing),
         ),
       ],
     );
