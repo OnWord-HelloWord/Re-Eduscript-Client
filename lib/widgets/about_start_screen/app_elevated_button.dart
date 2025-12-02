@@ -1,9 +1,9 @@
-// [lib/widgets/app_elevated_button.dart]
+// [lib/widgets/about_start_screen/app_elevated_button.dart]
 // 시작, 모드 선택 버튼 위젯
 
 import 'package:flutter/material.dart';
-import '../core/styles/app_colors.dart';
-import '../core/styles/app_sizes.dart';
+import 'package:re_eduscript_client/core/styles/app_colors.dart'; // [core] 색상
+import 'package:re_eduscript_client/core/styles/app_sizes.dart';  // [core] 사이즈
 
 class AppElevatedButton extends StatelessWidget {
   // [상태 변수]
@@ -29,7 +29,7 @@ class AppElevatedButton extends StatelessWidget {
     // [공통 스타일]
     // 1) 버튼 디자인
     final ButtonStyle buttonStyle = ElevatedButton.styleFrom(
-      backgroundColor: AppColors.blueButtonColor, // 배경색
+      backgroundColor: AppColors.blueLightColor, // 배경색
       foregroundColor: AppColors.whiteColor,      // 폰트색
       shadowColor: AppColors.buttonShadowColor,   // 그림자
       shape: RoundedRectangleBorder(

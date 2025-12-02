@@ -2,6 +2,7 @@
 // 선택 변수 모음
 
 // [1] 자막 모드
+// 강의 모드, 토론 모드
 enum Mode { lecture, conference }
 
 extension ModeExtension on Mode {
@@ -15,7 +16,22 @@ extension ModeExtension on Mode {
   }
 }
 
-// [2]
+// [2] 대기화면 타입
+// 미리보기, 재생버튼, 자막설정
+enum PreviewSectionType { preview, playbar, settings }
+
+extension PreviewExtension on PreviewSectionType {
+  String get previewValue {
+    switch(this) {
+      case PreviewSectionType.preview:
+        return "preview";
+      case PreviewSectionType.playbar:
+        return "playbar";
+      case PreviewSectionType.settings:
+        return "settings";
+    }
+  }
+}
 
 // [3] 자막 언어 종류
 //enum Language { en, ko, jp }

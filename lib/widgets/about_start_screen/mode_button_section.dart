@@ -1,12 +1,11 @@
-// [lib/widgets/mode_button_section.dart]
+// [lib/widgets/about_start_screen/mode_button_section.dart]
 // 시작, 모드 선택 버튼 섹션
 
 import 'dart:ui';
 import 'package:flutter/material.dart';
-import 'package:re_eduscript_client/widgets/app_elevated_button.dart';
-
-import '../core/constants/app_enums.dart';      // [이넘] 모드
-import '../core/styles/app_sizes.dart';         // [이넘] 크기
+import 'package:re_eduscript_client/core/constants/app_enums.dart'; // [core] 모드
+import 'package:re_eduscript_client/core/styles/app_sizes.dart';    // [core] 사이즈
+import 'package:re_eduscript_client/widgets/about_start_screen/app_elevated_button.dart';  // [widgets] 버튼
 
 class ModeButtonSection extends StatelessWidget {
   final bool showModeSelection;         // 모드 선택 여부
@@ -22,6 +21,7 @@ class ModeButtonSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // [현재 위젯 크기 정보]
     final Size screenSize = MediaQuery.of(context).size;  // 화면 사이즈
     final double screenWidth = screenSize.width;          // 화면 너비
     final double screenHeight = screenSize.height;        // 화면 높이

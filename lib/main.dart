@@ -3,10 +3,13 @@
 
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:window_manager/window_manager.dart';                // [의존성] 윈도우 매니저
-import 'package:re_eduscript_client/providers/mode_provider.dart';  // [Provider] 모드 선택
-import 'core/styles/app_sizes.dart';                                // [AppSizes] 최소 창 크기
-import 'package:re_eduscript_client/screens/start_screen.dart';     // [Screen] 시작 창
+import 'package:window_manager/window_manager.dart';
+import 'package:re_eduscript_client/providers/mode_provider.dart'; // [providers]
+import 'package:re_eduscript_client/providers/language_settings_provider.dart';
+import 'package:re_eduscript_client/providers/language_mapping_provider.dart';
+import 'package:re_eduscript_client/providers/subtitle_style_provider.dart';
+import 'package:re_eduscript_client/core/styles/app_sizes.dart';  // [cores]                               // [AppSizes] 최소 창 크기
+import 'package:re_eduscript_client/screens/start_screen.dart';   // [screens]
 
 void main() async {
   // [창 관리자 관련] (Window Manager)
@@ -33,7 +36,18 @@ void main() async {
     // [프로바이더 등록]
       MultiProvider(
         providers: [
-          ChangeNotifierProvider(create: (context) => ModeProvider(),)
+          // 1) Mode 관리
+          ChangeNotifierProvider(create: (context) => ModeProvider()),
+          // 2) 입출력 언어 관리
+          ChangeNotifierProvider(
+            create: (context) => LanguageSettingsProvider(
+              Provider.of<ModeProvider>(context, listen: false), // 현재 모드 전달
+            ),
+          ),
+          // 3) 국가별 언어 매핑 관리
+          ChangeNotifierProvider(create: (context) => LanguageMappingProvider()),
+          // 4) 자막 스타일 관리
+          ChangeNotifierProvider(create: (context) => SubtitleStyleProvider())
         ],
         child: MyApp(),
       ),

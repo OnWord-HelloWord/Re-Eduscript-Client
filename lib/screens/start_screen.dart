@@ -7,7 +7,7 @@ import 'package:re_eduscript_client/core/styles/app_sizes.dart';         // [cor
 import 'package:re_eduscript_client/core/constants/app_enums.dart';      // [core] 모드
 import 'package:re_eduscript_client/providers/mode_provider.dart';       // [providers] 모드
 import 'package:re_eduscript_client/screens/preview_setup_screen.dart';  // [screens] 대기 화면
-import 'package:re_eduscript_client/widgets/mode_button_section.dart';   // [widgets] 버튼 선택 위젯
+import 'package:re_eduscript_client/widgets/about_start_screen/mode_button_section.dart';   // [widgets] 버튼 선택 위젯
 
 class StartScreen extends StatefulWidget {
   const StartScreen({super.key});
@@ -45,8 +45,8 @@ class _StartScreenState extends State<StartScreen> {
 
   @override
   Widget build(BuildContext context) {
+    // [현재 위젯 크기 정보]
     final Size screenSize = MediaQuery.of(context).size;
-    final double screenWidth = screenSize.width;
     final double screenHeight = screenSize.height;
 
     return Scaffold(
@@ -108,7 +108,7 @@ class _StartScreenState extends State<StartScreen> {
             style: TextStyle(
               fontSize: AppSizes.startTitleFontSize,
               fontWeight: FontWeight.bold,
-              color: AppColors.bluePrimaryColor,
+              color: AppColors.blueColor,
               letterSpacing: AppSizes.startTitleSpacing,
             ),
           ),

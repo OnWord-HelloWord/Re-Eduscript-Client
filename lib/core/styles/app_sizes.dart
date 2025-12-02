@@ -12,7 +12,7 @@ class AppSizes {
   static const double baseFont = 14.0;        // 기본 폰트 크기
   static const double titleFontSize = 18.0;   // 제목 폰트 크기
   static const double largeFontSize = 40.0;   //
-  static const double smallFontSize = 12.0;   //
+  static const double smallFontSize = 12.0;   // [providers] 자막 설정에 사용
   static const double timerFontSize = 50.0;   // 타이머 폰트 크기
 
   // 패딩, 마진 (여백)
@@ -21,14 +21,14 @@ class AppSizes {
   static const double largePadding = 24.0;
 
   // 아이콘 크기
-  static const double baseIconSize = 24.0;
-  static const double smallIconSize = 16.0;
-  static const double mediumIconSize = 50.0;
-  static const double largeIconSize = 100.0;
+  // static const double baseIconSize = 24.0;
+  // static const double smallIconSize = 16.0;
+  // static const double mediumIconSize = 50.0;
+  // static const double largeIconSize = 100.0;
 
   // 컨테이너 둥글기
-  static const double baseRadius = 8.0;
-  static const double largeRadius = 12.0;
+  static const double baseRadius = 8.0;                 // (PreviewSection)
+  // static const double largeRadius = 12.0;
 
   // < 시작 화면 >
   // [폰트]
@@ -51,5 +51,9 @@ class AppSizes {
   static const double baseButtonHeight = 50.0;          // 높이
   static const double baseButtonFontSize = 30.0;        // 폰트 크기
   static const BorderRadius baseButtonRadius = const BorderRadius.all(Radius.circular(0.0));  // 둥글기
+
+  // < 대기 화면 >
+  static const double previewTitleSize = 18.0;          // 제목 크기
+  static const double previewIconSize = 20.0;           // 아이콘 크기
 
 }
