@@ -9,7 +9,7 @@ class AppSizes {
   static const double minScreenHeight = 620.0;
 
   // 폰트 크기
-  static const double baseFont = 14.0;        // 기본 폰트 크기
+  static const double baseFontSize = 14.0;        // 기본 폰트 크기
   static const double titleFontSize = 18.0;   // 제목 폰트 크기
   static const double largeFontSize = 40.0;   //
   static const double smallFontSize = 12.0;   // [providers] 자막 설정에 사용
@@ -56,4 +56,7 @@ class AppSizes {
   static const double previewTitleSize = 18.0;          // 제목 크기
   static const double previewIconSize = 20.0;           // 아이콘 크기
 
+  // < 자막 설정 >
+  static const double containerRadius = 7.0;
+  static const double dropdownIconSize = 24.0;
 }

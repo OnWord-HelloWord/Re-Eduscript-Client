@@ -1,0 +1,120 @@
+// []
+// [settings] 언어 선택 드롭다운
+
+import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:re_eduscript_client/core/styles/app_sizes.dart';        // [enums] 사이즈
+import 'package:re_eduscript_client/core/constants/app_enums.dart';     // [enums] 모드
+import 'package:re_eduscript_client/core/constants/app_languages.dart'; // [enums] 언어 리스트
+import 'package:re_eduscript_client/providers/mode_provider.dart';      // [providers] 모드
+import 'package:re_eduscript_client/providers/language_settings_provider.dart'; // [providers] 언어 선택
+
+import 'package:re_eduscript_client/core/styles/app_colors.dart';
+import 'package:re_eduscript_client/widgets/about_preview_setup_screen/settings/language_selection_dialog.dart';     // [cores] 색상
+
+
+class LanguageSelectionDropdown extends StatelessWidget {
+  final List<String> selectedLanguages;   // 선택된 언어 리스트
+  final List<String> availableLanguages;  // 선택 가능한 언어 리스트
+  final Function(List<String>) onChanged; // 인식 언어 업데이트
+  final bool isSelected;                  // 인식 언어 선택 여부
+  final double screenWidth;
+  final double screenHeight;
+
+
+  const LanguageSelectionDropdown({
+    super.key,
+    required this.selectedLanguages,
+    required this.availableLanguages,
+    required this.onChanged,
+    required this.isSelected,
+    required this.screenWidth,
+    required this.screenHeight,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    // [provider] 선택된 언어 받아오기
+    final settings = context.watch<LanguageSettingsProvider>();
+    final selectedLanguages = settings.selectedInputLanguages;  // 입력 언어 리스트
+
+    // 선택된 언어 출력 메서드
+    String _getDisplayText() {
+      if (selectedLanguages.isEmpty) {
+        return '언어를 선택하세요';
+      } else if (selectedLanguages.length == 1) {
+        return selectedLanguages.first;
+      } else {
+        return '${selectedLanguages.first} 외 ${selectedLanguages.length - 1}개';
+      }
+    }
+
+    // 언어 선택 다이얼로그 출력 메서드
+    void _showLanguageDialog(BuildContext context) async {
+      // [provider] 현재 선택된 모드
+      // 강의 모드 true, 토론 모드 false
+      final mode = Provider.of<ModeProvider>(context, listen: false).currentMode;
+      final bool isLectureMode = mode == Mode.lecture;
+
+      final result = await showDialog<List<String>>(
+        context: context,
+        builder:
+            (context) => LanguageSelectionDialog(
+          availableLanguages: availableLanguages, // 모든 언어 리스트
+          selectedLanguages: selectedLanguages,   // 선택된 언어 리스트
+          isLectureMode: isLectureMode,           // 현재 모드 (강의, 토론)
+          isSelected: isSelected,                 // 선택 여부
+        ),
+      );
+
+      if (result != null) { // 리스트에 변동이 있을 때
+        onChanged(result);  // 인식 언어 업데이트
+      }
+    }
+
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [
+        // [1] 이름
+        Text(
+          "언어",
+          style: TextStyle(
+            fontSize: AppSizes.baseFontSize,
+            fontWeight: FontWeight.bold,
+            color: Colors.black,
+          ),
+        ),
+
+        // [2] 드롭다운 위젯
+        InkWell(
+          onTap: () => _showLanguageDialog(context),
+          borderRadius: BorderRadius.circular(5),
+          child: Padding(
+            padding: EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+            child: Row(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                // 1) 선택된 언어 출력
+                Text(
+                  _getDisplayText(),
+                  style: TextStyle(
+                    color: Colors.black,
+                    fontSize: AppSizes.baseFontSize,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                SizedBox(width: 5),
+                // 2) 아이콘
+                Icon(
+                  Icons.keyboard_arrow_down,
+                  color: Colors.black,             // 색상
+                  size: AppSizes.dropdownIconSize, // 크기
+                ),
+              ],
+            ),
+          ),
+        ),
+      ],
+    );
+  }
+}
