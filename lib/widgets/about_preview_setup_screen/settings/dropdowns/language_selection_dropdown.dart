@@ -5,19 +5,16 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:re_eduscript_client/core/styles/app_sizes.dart';        // [enums] 사이즈
 import 'package:re_eduscript_client/core/constants/app_enums.dart';     // [enums] 모드
-import 'package:re_eduscript_client/core/constants/app_languages.dart'; // [enums] 언어 리스트
 import 'package:re_eduscript_client/providers/mode_provider.dart';      // [providers] 모드
 import 'package:re_eduscript_client/providers/language_settings_provider.dart'; // [providers] 언어 선택
-
-import 'package:re_eduscript_client/core/styles/app_colors.dart';
-import 'package:re_eduscript_client/widgets/about_preview_setup_screen/settings/language_selection_dialog.dart';     // [cores] 색상
+import 'package:re_eduscript_client/widgets/about_preview_setup_screen/settings/language_dialog/language_selection_dialog.dart';  // [] 다이얼로그
 
 
 class LanguageSelectionDropdown extends StatelessWidget {
   final List<String> selectedLanguages;   // 선택된 언어 리스트
   final List<String> availableLanguages;  // 선택 가능한 언어 리스트
   final Function(List<String>) onChanged; // 인식 언어 업데이트
-  final bool isSelected;                  // 인식 언어 선택 여부
+  final bool isInputLanguage;             // 입력 언어일 때
   final double screenWidth;
   final double screenHeight;
 
@@ -27,7 +24,7 @@ class LanguageSelectionDropdown extends StatelessWidget {
     required this.selectedLanguages,
     required this.availableLanguages,
     required this.onChanged,
-    required this.isSelected,
+    required this.isInputLanguage,
     required this.screenWidth,
     required this.screenHeight,
   });
@@ -63,7 +60,7 @@ class LanguageSelectionDropdown extends StatelessWidget {
           availableLanguages: availableLanguages, // 모든 언어 리스트
           selectedLanguages: selectedLanguages,   // 선택된 언어 리스트
           isLectureMode: isLectureMode,           // 현재 모드 (강의, 토론)
-          isSelected: isSelected,                 // 선택 여부
+          isInputLanguage: isInputLanguage,       // 입력 언어일 때
         ),
       );
 

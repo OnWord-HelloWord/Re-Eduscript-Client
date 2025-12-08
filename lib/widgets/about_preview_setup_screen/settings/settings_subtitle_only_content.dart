@@ -3,18 +3,24 @@
 
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:re_eduscript_client/core/constants/app_enums.dart';  // [cores] 모드
 import 'package:re_eduscript_client/core/constants/app_languages.dart';
 import 'package:re_eduscript_client/core/constants/app_titles.dart'; // [cores] 타이틀
 import 'package:re_eduscript_client/core/styles/app_sizes.dart';     // [cores] 사이즈
-import 'package:re_eduscript_client/providers/language_settings_provider.dart';
-import 'package:re_eduscript_client/providers/mode_provider.dart';   // [providers] 모드
-import 'package:re_eduscript_client/providers/subtitle_style_provider.dart'; // [providers] 모드
-import 'package:re_eduscript_client/widgets/about_preview_setup_screen/settings/set_section_title.dart'; // [widgets] 제목 지정
-import 'package:re_eduscript_client/widgets/about_preview_setup_screen/settings/language_selection_dropdown.dart';
-import 'package:re_eduscript_client/widgets/about_preview_setup_screen/settings/settings_background_container.dart'; // [widgets] 배경 컨테이너
-import 'package:re_eduscript_client/widgets/about_preview_setup_screen/settings/setting_item_wrapper.dart'; // [widgets] 래퍼 컨테이너
-import 'package:re_eduscript_client/widgets/about_preview_setup_screen/settings/onoff_switch_widget.dart'; // [widgets] onoff 스위치
+import 'package:re_eduscript_client/providers/language_settings_provider.dart'; // [providers] 언어 설정
+import 'package:re_eduscript_client/providers/subtitle_style_provider.dart'; // [providers] 자막 스타일
+import 'package:re_eduscript_client/widgets/about_preview_setup_screen/settings/components/section_divider.dart';
+import 'package:re_eduscript_client/widgets/about_preview_setup_screen/settings/components/set_section_title.dart'; // [widgets] 제목 지정
+import 'package:re_eduscript_client/widgets/about_preview_setup_screen/settings/components/settings_background_container.dart'; // [widgets] 배경 컨테이너
+import 'package:re_eduscript_client/widgets/about_preview_setup_screen/settings/components/set_sub_section_wrapper.dart'; // [widgets] 배경 컨테이너
+import 'package:re_eduscript_client/widgets/about_preview_setup_screen/settings/components/setting_item_wrapper.dart'; // [widgets] 래퍼 컨테이너
+import 'package:re_eduscript_client/widgets/about_preview_setup_screen/settings/components/onoff_switch_widget.dart'; // [widgets] onoff 스위치
+import 'package:re_eduscript_client/widgets/about_preview_setup_screen/settings/dropdowns/language_selection_dropdown.dart'; // [widgets] 드롭다운
+import 'package:re_eduscript_client/widgets/about_preview_setup_screen/settings/dropdowns/vertical_position_dropdown.dart';
+import 'package:re_eduscript_client/widgets/about_preview_setup_screen/settings/dropdowns/font_style_dropdown.dart';
+import 'package:re_eduscript_client/widgets/about_preview_setup_screen/settings/dropdowns/font_size_dropdown.dart';
+import 'package:re_eduscript_client/widgets/about_preview_setup_screen/settings/dropdowns/font_color_dropdown.dart';
+import 'package:re_eduscript_client/widgets/about_preview_setup_screen/settings/dropdowns/font_background_color_dropdown.dart';
+import 'package:re_eduscript_client/widgets/about_preview_setup_screen/settings/dropdowns/font_background_opacity_dropdown.dart';
 
 class SettingsSubtitleOnlyContent extends StatefulWidget {
 
@@ -36,10 +42,11 @@ class _SettingsSubtitleOnlyContentState extends State<SettingsSubtitleOnlyConten
     return SingleChildScrollView(
       child: Column(
         children: [
-          this._buildScreenShareSection(styles),
+          _buildScreenShareSection(styles),
           SizedBox(height: 30),
-          this._buildInputLanguageSection(languages),
+          _buildInputLanguageSection(languages),
           SizedBox(height: 25),
+          _buildOutputLanguageSection(languages)
         ]
       ),
     );
@@ -102,15 +109,12 @@ class _SettingsSubtitleOnlyContentState extends State<SettingsSubtitleOnlyConten
           child: SettingItemWrapper(
             // -> 언어 선택 드롭다운
             child: LanguageSelectionDropdown(
-              // 선택된 언어 리스트
-              selectedLanguages: languages.selectedInputLanguages,
-              // 선택 가능한 언어 리스트
-              availableLanguages: AppLanguages.languageOptions,
-              // 인식 언어 업데이트
-              onChanged: (List<String> newLanguages) {
+              selectedLanguages: languages.selectedInputLanguages, // 선택된 언어 리스트
+              availableLanguages: AppLanguages.languageOptions,    // 선택 가능한 언어 리스트
+              onChanged: (List<String> newLanguages) {             // 인식 언어 업데이트
                 languages.updateInputLanguages(newLanguages);
               },
-              isSelected: true, // 인식 언어 선택 여부
+              isInputLanguage: true, // 입력 언어일 때
               screenWidth: screenWidth,
               screenHeight: screenHeight,
             ),
@@ -121,80 +125,78 @@ class _SettingsSubtitleOnlyContentState extends State<SettingsSubtitleOnlyConten
   }
 
   // [3] 출력 언어 설정 섹션
-  // Widget _buildOutputLanguageSection(SubtitleStyleProvider settings) {
-  //   return Column(
-  //     children: [
-  //       // 1) 섹션 타이틀 (-> 자막 설정)
-  //       SetSectionTitle(title: AppTitles.subtitleSectionTitle),
-  //       SizedBox(height: 10),
-  //       // 2) 배경 컨테이너
-  //       SettingsBackgroundContainer(
-  //         child: Column(
-  //           children: [
-  //             _buildSmallContainer(
-  //               child: MultiLanguageDropdown(
-  //                 title: "언어",
-  //                 selectedLanguages: settings.selectedOutputLanguages,
-  //                 availableLanguages: outputLanguagesList,
-  //                 onChanged: (List<String> newLanguages) {
-  //                   settings.updateOutputLanguages(newLanguages); // 자막 언어 설정
-  //                   final currentMode =
-  //                       context.read<ModeProvider>().currentMode;
-  //                   if (currentMode == Mode.conference) {
-  //                     // 토론 모드 시
-  //                     settings.updateInputLanguages(
-  //                       newLanguages,
-  //                     ); // 자막 언어 = 음성 언어
-  //                   }
-  //                 },
-  //                 screenWidth: widget.screenWidth,
-  //                 screenHeight: widget.screenHeight,
-  //                 isInputLanguage: false, // 음성 언어 선택 여부 (false -> 자막 언어 선택 중)
-  //               ),
-  //             ),
-  //             SizedBox(height: 20),
-  //             _buildSubSection(
-  //               title: "스타일",
-  //               content: _buildMediumContainer(
-  //                 child: Column(
-  //                   children: [
-  //                     _buildPositionDropdown(),
-  //                     _buildDivider(),
-  //                     _buildStyleDropdown(),
-  //                   ],
-  //                 ),
-  //               ),
-  //             ),
-  //             SizedBox(height: 20),
-  //             _buildSubSection(
-  //               title: "텍스트",
-  //               content: _buildMediumContainer(
-  //                 child: Column(
-  //                   children: [
-  //                     _buildSizeDropdown(),
-  //                     _buildDivider(),
-  //                     _buildTextColorDropdown(),
-  //                   ],
-  //                 ),
-  //               ),
-  //             ),
-  //             SizedBox(height: 20),
-  //             _buildSubSection(
-  //               title: "배경",
-  //               content: _buildMediumContainer(
-  //                 child: Column(
-  //                   children: [
-  //                     _buildBackgroundColorDropdown(),
-  //                     _buildDivider(),
-  //                     _buildOpacityDropdown(),
-  //                   ],
-  //                 ),
-  //               ),
-  //             ),
-  //           ],
-  //         ),
-  //       ),
-  //     ],
-  //   );
-  // }
+  Widget _buildOutputLanguageSection(LanguageSettingsProvider languages) {
+    final screenWidth = MediaQuery.of(context).size.width;
+    final screenHeight = MediaQuery.of(context).size.height;
+
+    return Column(
+      children: [
+        // 1) 섹션 타이틀 (-> 자막 설정)
+        SetSectionTitle(title: AppTitles.subtitleSectionTitle),
+        SizedBox(height: 10),
+        // 2) 배경 컨테이너
+        SettingsBackgroundContainer(
+          child: Column(
+            children: [
+              // 출력 자막 언어
+              SettingItemWrapper(
+                    child: LanguageSelectionDropdown(
+                      selectedLanguages: languages.selectedOutputLanguages, // 선택된 언어 리스트
+                      availableLanguages: AppLanguages.languageOptions,     // 선택 가능한 언어 리스트
+                      onChanged: (List<String> newLanguages) {              // 출력 언어 업데이트
+                        languages.updateOutputLanguages(newLanguages);
+                      },
+                      isInputLanguage: false, // 출력 언어일 때
+                      screenWidth: screenWidth,
+                      screenHeight: screenHeight,
+                    ),
+                  ),
+              const SizedBox(height: 20),
+
+              // 자막 스타일 섹션
+              SetSubSectionWrapper(
+                  title: AppTitles.styleSubSectionTitle, // 서브 섹션 타이틀
+                  content: Column(
+                    children: [
+                      // 드롭다운
+                      SettingItemWrapper(child: VerticalPositionDropdown()),
+                      const SectionDivider(), // 구분선
+                      SettingItemWrapper(child: FontStyleDropdown()),
+                    ],
+                  ),
+              ),
+              const SizedBox(height: 20),
+
+              // 자막 텍스트 섹션
+              SetSubSectionWrapper(
+                title: AppTitles.textSubSectionTitle, // 서브 섹션 타이틀
+                content: Column(
+                  children: [
+                    // 드롭다운
+                    SettingItemWrapper(child: FontSizeDropdown()),
+                    const SectionDivider(), // 구분선
+                    SettingItemWrapper(child: FontColorDropdown()),
+                  ],
+                ),
+              ),
+              const SizedBox(height: 20),
+
+              // 자막 배경 섹션
+              SetSubSectionWrapper(
+                title: AppTitles.backgroundSubSectionTitle, // 서브 섹션 타이틀
+                content: Column(
+                  children: [
+                    // 드롭다운
+                    SettingItemWrapper(child: FontBackgroundColorDropdown()),
+                    const SectionDivider(), // 구분선
+                    SettingItemWrapper(child: FontBackgroundOpacityDropdown()),
+                  ],
+                ),
+              ),
+            ],
+          ),
+        ),
+      ]
+    );
+  }
 }

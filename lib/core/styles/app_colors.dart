@@ -25,8 +25,8 @@ class AppColors {
   //static const Color greenColor = Color(0xFF45CE78);
 
   // 회색
-  //static const Color greyColor = Color(0xFF7C7C7C);
-  static const Color greyDividerColor = Color(0xFF707070); // 회색 구분석
+  static const Color greyColor = Color(0xFF7C7C7C);
+  static const Color greyDividerColor = Color(0xFF707070); // 회색 구분선
   
   // [버튼] 시작, 모드 선택
   static const Color buttonShadowColor = Colors.black26; // (버튼) 그림자 색

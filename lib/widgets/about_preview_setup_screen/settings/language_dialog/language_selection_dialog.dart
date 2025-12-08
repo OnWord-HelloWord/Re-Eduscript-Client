@@ -1,24 +1,23 @@
 
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
-import 'package:re_eduscript_client/providers/language_settings_provider.dart';
-import 'package:re_eduscript_client/widgets/about_preview_setup_screen/settings/language_dialog/searching_box_widget.dart';
+
 import 'package:re_eduscript_client/widgets/about_preview_setup_screen/settings/language_dialog/set_languages_button_widget.dart'; // [providers] 언어 선택
 import 'package:re_eduscript_client/core/styles/app_colors.dart'; // [cores] 색상
-import 'package:re_eduscript_client/core/constants/app_languages.dart'; // [cores] 언어
-
+import 'package:re_eduscript_client/widgets/about_preview_setup_screen/settings/language_dialog/language_checkbox_tile_widget.dart';
+import 'package:re_eduscript_client/widgets/about_preview_setup_screen/settings/language_dialog/searching_box_widget.dart';
+import 'package:re_eduscript_client/widgets/about_preview_setup_screen/settings/language_dialog/language_radiobox_tile_widget.dart';
 class LanguageSelectionDialog extends StatefulWidget {
   final List<String> availableLanguages;  // 모든 언어 리스트
   final List<String> selectedLanguages;   // 선택된 언어 리스트
   final bool isLectureMode;               // 현재 모드 (강의, 토론)
-  final bool isSelected;                  // 선택 여부
+  final bool isInputLanguage;             // 입력 언어일 때
 
   const LanguageSelectionDialog({
     super.key,
     required this.availableLanguages,
     required this.selectedLanguages,
     required this.isLectureMode,
-    required this.isSelected
+    required this.isInputLanguage
   });
 
   @override
@@ -39,7 +38,7 @@ class _LanguageSelectionDialogState extends State<LanguageSelectionDialog> {
     _filteredLanguages = widget.availableLanguages;
   }
 
-  // 언어 검색 필터링 메서드
+  // 언어 검색, 필터링 메서드
   void _filterLanguages(String newQuery) {
     setState(() {
       // 검색 상태 업데이트
@@ -58,10 +57,10 @@ class _LanguageSelectionDialogState extends State<LanguageSelectionDialog> {
     });
   }
 
-  // 단일 언어 선택
-  void _toggleLanguage(String language, bool? value) {
+  // 다중 언어 선택 시, 리스트 변경
+  void _changeLanguage(String language, bool? value) {
     setState(() {
-      if (value == true) {
+      if (value == true) { // 사용자가 체크했을 때 !
         _newSelectedLanguages.add(language);
       } else {
         _newSelectedLanguages.remove(language);
@@ -95,43 +94,33 @@ class _LanguageSelectionDialogState extends State<LanguageSelectionDialog> {
               onChanged: _filterLanguages, // (호출) 검색어가 변경될 때마다 호출
             ),
             SizedBox(height: 16),
-            // [3] 언어 선택 리스트
+            // [3] 언어 선택 리스트 + 체크박스
             Expanded(
               child: ListView.builder(
-                itemCount: _filteredLanguages.length,
+                itemCount: _filteredLanguages.length, // 검색된 언어 수
                 itemBuilder: (context, index) {
-                  final language = _filteredLanguages[index];
-                  final isSelected = _newSelectedLanguages.contains(language);
-
-                  // 1) 강의 모드일 때 (단일 언어 인식)
-                  if (widget.isLectureMode && widget.isSelected) {
-                    return ListTile(
-                      // 특정 언어
-                      title: Text(language, style: const TextStyle(color: Colors.black, fontWeight: FontWeight.bold),),
-                      // 아이콘
-                      trailing: isSelected ? Icon(Icons.check, color: AppColors.blueLightColor, size: 24) : null,
+                  final language = _filteredLanguages[index]; // 현재 검색된 언어
+                  final isSelected = _newSelectedLanguages.contains(language); // 언어 선택 여부
+                  // 1) 라디오박스 위젯 (단일 선택)
+                  // -> 강의 모드 && 입력 언어일 때
+                  if (widget.isLectureMode && widget.isInputLanguage) {
+                    return LanguageRadioboxTile(
+                      language: language,
+                      isSelected: isSelected,
                       onTap: () {
                         setState(() {
                           _newSelectedLanguages.clear();
                           _newSelectedLanguages.add(language);
                         });
-                      },
+                      }
                     );
                   }
-
-                  // 2) 토론 모드일 때 (다중 언어 인식)
+                  // 2) 체크 박스 위젯 (다중 선택)
                   else {
-                    return CheckboxListTile(
-                      title: Text(language, style: const TextStyle(color: Colors.black, fontWeight: FontWeight.bold),),
-                      value: isSelected,
-                      activeColor: AppColors.blueLightColor,
-                      checkColor: Colors.white,
-                      hoverColor: AppColors.blueLightColor.withOpacity(0.05),
-                      side: BorderSide(
-                        color: isSelected ? AppColors.blueLightColor : Colors.grey,
-                        width: 2,
-                      ),
-                      onChanged: (value) => _toggleLanguage(language, value),
+                    return LanguageCheckboxTile(
+                      language: language,
+                      isSelected: isSelected,
+                      onChanged: (value) => _changeLanguage(language, value),
                     );
                   }
                 },
@@ -152,7 +141,7 @@ class _LanguageSelectionDialogState extends State<LanguageSelectionDialog> {
                 SizedBox(width: 8),
                 // - 확인 버튼
                 SetLanguagesButton(
-                  buttonColor: AppColors.blueColor,
+                  buttonColor: AppColors.blueLightColor,
                   buttonName: "확인",
                   buttonFontColor: Colors.white,
                   onPressed:

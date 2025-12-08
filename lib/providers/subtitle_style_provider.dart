@@ -27,6 +27,18 @@ class SubtitleStyleProvider extends ChangeNotifier {
   String get selectedBackgroundColor => _selectedBackgroundColor;
   String get selectedBackgroundOpacity => _selectedBackgroundOpacity;
 
+  // [Getter] 옵션 가져오기
+  List<String> get verticalPositionOptions => ['상단', '중앙', '하단'];
+  List<String> get horizontalPositionOptions => ['좌측', '중앙', '우측'];
+  List<String> get fontStyleOptions => ['기본', '굵게', '이탤릭'];
+  List<String> get fontSizeOptions => ['매우 작게', '작게', '중간', '크게', '매우 크게'];
+  List<String> get fontColorOptions =>
+      ['흰색', '검정', '빨강', '주황', '노랑', '초록', '파랑', '보라'];
+  List<String> get backgroundColorOptions =>
+      ['흰색', '검정', '빨강', '주황', '노랑', '초록', '파랑', '보라'];
+  List<String> get backgroundOpacityOptions =>
+      ['0%', '25%', '50%', '75%', '100%'];
+
   // [Setter] 상태 업데이트
   // 1) 화면 공유 상태 변경
   void updateScreenShareedEnabled(bool enabled) {
@@ -36,7 +48,7 @@ class SubtitleStyleProvider extends ChangeNotifier {
   }
 
   // 2) 자막 세로 정렬 변경
-  void updatePosition(String position) {
+  void updateVerticalPosition(String position) {
     _selectedVerticalPosition = position;
     notifyListeners();
   }

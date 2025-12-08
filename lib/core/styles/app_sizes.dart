@@ -50,7 +50,7 @@ class AppSizes {
   // [버튼] 공통 스타일 (시작 & 모드)
   static const double baseButtonHeight = 50.0;          // 높이
   static const double baseButtonFontSize = 30.0;        // 폰트 크기
-  static const BorderRadius baseButtonRadius = const BorderRadius.all(Radius.circular(0.0));  // 둥글기
+  static const BorderRadius baseButtonRadius = const BorderRadius.all(Radius.circular(10.0));  // 둥글기
 
   // < 대기 화면 >
   static const double previewTitleSize = 18.0;          // 제목 크기
