@@ -84,7 +84,7 @@ class _CommonSettingDropdownState extends State<CommonSettingDropdown>
           childFocusNode: _buttonFocusNode,
           // 드롭다운 스타일
           style: MenuStyle(
-            backgroundColor: WidgetStateProperty.all(Colors.white),
+            backgroundColor: WidgetStateProperty.all(Colors.grey[100]),
             elevation: WidgetStateProperty.all(8.0),
             shape: WidgetStateProperty.all(
               RoundedRectangleBorder(
@@ -93,7 +93,7 @@ class _CommonSettingDropdownState extends State<CommonSettingDropdown>
             ),
           ),
 
-          // [2-1] 메뉴 아이템 생성
+          // [2-1] 메뉴 아이템 생성 (
           menuChildren: widget.optionList.map((String option) {
             return MenuItemButton(
               style: ButtonStyle(
@@ -141,7 +141,7 @@ class _CommonSettingDropdownState extends State<CommonSettingDropdown>
             );
           }).toList(),
 
-          // [2-2] 드롭다운 버튼
+          // [2-2] 드롭다운 버튼 (선택된 항목 표시)
           builder: (
               BuildContext context,
               MenuController controller,

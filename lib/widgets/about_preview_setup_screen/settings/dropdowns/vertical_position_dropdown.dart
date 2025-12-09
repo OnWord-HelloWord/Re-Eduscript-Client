@@ -8,11 +8,11 @@ class VerticalPositionDropdown extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // [provider] 자막 스타일 받아오기 (Horizontal 정렬)
+    // [provider] 자막 스타일 받아오기 (Vertical 정렬)
     final styles = context.watch<SubtitleStyleProvider>();
 
     return CommonSettingDropdown(
-      name: "정렬",
+      name: "세로 정렬",
       initialValue: styles.selectedVerticalPosition, // 초기값
       optionList: styles.verticalPositionOptions,    // 옵션 리스트
       onChanged: (String newPosition) {              // 상태 변화
