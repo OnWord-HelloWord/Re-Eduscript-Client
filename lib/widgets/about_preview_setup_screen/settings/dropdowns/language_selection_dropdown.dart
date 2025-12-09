@@ -1,5 +1,5 @@
 // []
-// [settings] 언어 선택 드롭다운
+// [widgets] 언어 선택 드롭다운
 
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -18,7 +18,6 @@ class LanguageSelectionDropdown extends StatelessWidget {
   final double screenWidth;
   final double screenHeight;
 
-
   const LanguageSelectionDropdown({
     super.key,
     required this.selectedLanguages,
@@ -32,17 +31,21 @@ class LanguageSelectionDropdown extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // [provider] 선택된 언어 받아오기
-    final settings = context.watch<LanguageSettingsProvider>();
-    final selectedLanguages = settings.selectedInputLanguages;  // 입력 언어 리스트
+    final languages = context.watch<LanguageSettingsProvider>();
+
+    // 입력 언어 선택 시 -> 선택된 입력 언어 출력
+    // 아닐 경우 -> 선택된 출력 언어 출력
+    final List<String> currentSelectedLanguages = isInputLanguage
+      ? languages.selectedInputLanguages : languages.selectedOutputLanguages;
 
     // 선택된 언어 출력 메서드
     String _getDisplayText() {
-      if (selectedLanguages.isEmpty) {
+      if (currentSelectedLanguages.isEmpty) {
         return '언어를 선택하세요';
-      } else if (selectedLanguages.length == 1) {
-        return selectedLanguages.first;
+      } else if (currentSelectedLanguages.length == 1) {
+        return currentSelectedLanguages.first;
       } else {
-        return '${selectedLanguages.first} 외 ${selectedLanguages.length - 1}개';
+        return '${currentSelectedLanguages.first} 외 ${currentSelectedLanguages.length - 1}개';
       }
     }
 
@@ -58,7 +61,7 @@ class LanguageSelectionDropdown extends StatelessWidget {
         builder:
             (context) => LanguageSelectionDialog(
           availableLanguages: availableLanguages, // 모든 언어 리스트
-          selectedLanguages: selectedLanguages,   // 선택된 언어 리스트
+          selectedLanguages: currentSelectedLanguages, // 선택된 언어 리스트
           isLectureMode: isLectureMode,           // 현재 모드 (강의, 토론)
           isInputLanguage: isInputLanguage,       // 입력 언어일 때
         ),

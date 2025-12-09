@@ -18,6 +18,7 @@ class FontBackgroundOpacityDropdown extends StatelessWidget {
       onChanged: (String newOpacity) {                // 상태 변화
         styles.updateBackgroundOpacity(newOpacity);
       },
+      isOpacityDropdown: true,                         // 드롭다운에 투명도 원 표시
     );
   }
 }

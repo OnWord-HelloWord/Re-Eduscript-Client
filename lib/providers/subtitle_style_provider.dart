@@ -39,6 +39,22 @@ class SubtitleStyleProvider extends ChangeNotifier {
   List<String> get backgroundOpacityOptions =>
       ['0%', '25%', '50%', '75%', '100%'];
 
+  // 색상 매핑 메서드
+  Color mapColorName(String color) {
+    switch (color) {
+      case '빨강': return Colors.red;
+      case '주황': return Colors.orange;
+      case '노랑': return Colors.yellow;
+      case '초록': return Colors.green;
+      case '파랑': return Colors.blue;
+      case '보라': return Colors.purple;
+      case '검정': return Colors.black;
+      case '흰색':
+      default:
+        return Colors.white;
+    }
+  }
+
   // [Setter] 상태 업데이트
   // 1) 화면 공유 상태 변경
   void updateScreenShareedEnabled(bool enabled) {

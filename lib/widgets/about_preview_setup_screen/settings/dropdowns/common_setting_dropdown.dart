@@ -1,25 +1,36 @@
 import 'package:flutter/material.dart';
-import 'package:re_eduscript_client/core/styles/app_sizes.dart';     // [cores] 사이즈
+import 'package:provider/provider.dart';
+import 'package:re_eduscript_client/core/styles/app_sizes.dart';  // [cores] 사이즈
+import 'package:re_eduscript_client/core/utils/color_circle_mixin.dart';
+import 'package:re_eduscript_client/providers/subtitle_style_provider.dart';  // [cores] 원 그리기
 
 class CommonSettingDropdown extends StatefulWidget {
   final String name;                    // 항목 이름
   final String initialValue;            // 초기값
   final List<String> optionList;        // 옵션 리스트
   final ValueChanged<String> onChanged; // 상태 변화 (콜백)
+  final bool isColorDropdown;           // 색상 드롭다운 여부
+  final bool isOpacityDropdown;         // 투명도 드롭다운 여부
 
   const CommonSettingDropdown({
     super.key,
     required this.name,
     required this.initialValue,
     required this.optionList,
-    required this.onChanged
+    required this.onChanged,
+    this.isColorDropdown = false,   // 기본값 false
+    this.isOpacityDropdown = false, // 기본값 false
   });
 
   @override
   State<CommonSettingDropdown> createState() => _CommonSettingDropdownState();
 }
 
-class _CommonSettingDropdownState extends State<CommonSettingDropdown> {
+class _CommonSettingDropdownState extends State<CommonSettingDropdown>
+    with ColorCircleMixin // 믹스인 가져오기
+{
+  // [provider] 색상 받아오기
+  late final styles = context.watch<SubtitleStyleProvider>();
   final FocusNode _buttonFocusNode = FocusNode(); // 포커스 관리
   late String _selectedValue;                     // 현재 선택된 값 (UI 출력)
 
@@ -52,6 +63,7 @@ class _CommonSettingDropdownState extends State<CommonSettingDropdown> {
     });
     widget.onChanged(option);
   }
+
   @override
   Widget build(BuildContext context) {
     return Row(
@@ -72,16 +84,16 @@ class _CommonSettingDropdownState extends State<CommonSettingDropdown> {
           childFocusNode: _buttonFocusNode,
           // 드롭다운 스타일
           style: MenuStyle(
-            backgroundColor: WidgetStateProperty.all(Colors.white),
+            backgroundColor: WidgetStateProperty.all(Colors.grey[100]),
             elevation: WidgetStateProperty.all(8.0),
             shape: WidgetStateProperty.all(
               RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(15.0), // 둥근 모서리
+                borderRadius: BorderRadius.circular(10.0), // 둥근 모서리
               ),
             ),
           ),
 
-          // [2-1] 메뉴 아이템 생성
+          // [2-1] 메뉴 아이템 생성 (
           menuChildren: widget.optionList.map((String option) {
             return MenuItemButton(
               style: ButtonStyle(
@@ -102,19 +114,34 @@ class _CommonSettingDropdownState extends State<CommonSettingDropdown> {
               onPressed: () => _selectOption(option),
               child: Container(
                 padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 10.0),
-                child: Text(
-                  option,
-                  style: TextStyle(
-                    color: Colors.black,
-                    fontSize: AppSizes.baseFontSize,
-                    fontWeight: FontWeight.bold,
-                  ),
+                child: Row(
+                  children: [
+                    // [색상,투명도 원 표시]
+                    if (widget.isColorDropdown || widget.isOpacityDropdown) ... [
+                      buildCircle(
+                        value: option,
+                        isColorDropdown: widget.isColorDropdown,
+                        isOpacityDropdown: widget.isOpacityDropdown,
+                        styles: styles,
+                      ),
+                      const SizedBox(width: 10,),
+                    ],
+                    // [항목 이름]
+                    Text(
+                      option,
+                      style: TextStyle(
+                        color: Colors.black,
+                        fontSize: AppSizes.baseFontSize,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ],
                 ),
               ),
             );
           }).toList(),
 
-          // [2-2] 드롭다운 버튼
+          // [2-2] 드롭다운 버튼 (선택된 항목 표시)
           builder: (
               BuildContext context,
               MenuController controller,
@@ -134,7 +161,17 @@ class _CommonSettingDropdownState extends State<CommonSettingDropdown> {
                 child: Row(
                   mainAxisSize: MainAxisSize.min,
                   children: [
-                    // 현재 선택된 항목
+                    // [현재 선택된 원 표시]
+                    if (widget.isColorDropdown || widget.isOpacityDropdown) ... [
+                      buildCircle(
+                        value: _selectedValue,
+                        isColorDropdown: widget.isColorDropdown,
+                        isOpacityDropdown: widget.isOpacityDropdown,
+                        styles: styles,
+                      ),
+                      const SizedBox(width: 5),
+                    ],
+                    // [현재 선택된 항목]
                     Text(
                       _selectedValue,
                       style: TextStyle(

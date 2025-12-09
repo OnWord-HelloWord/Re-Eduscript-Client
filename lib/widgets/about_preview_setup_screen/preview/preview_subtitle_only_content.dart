@@ -19,7 +19,6 @@ class PreviewSubtitleOnlyContent extends StatelessWidget {
     final mapping = context.watch<LanguageMappingProvider>();    // 국가별 언어 매핑 관리
     final styles = context.watch<SubtitleStyleProvider>();       // 자막 스타일 관리
 
-
     final languages = language.selectedOutputLanguages;  // 선택된 출력 언어
     const double referenceScreenWidth = 800.0;
 
@@ -44,7 +43,7 @@ class PreviewSubtitleOnlyContent extends StatelessWidget {
           child: Column(
             mainAxisAlignment: styles.getAlignment(),     // [providers] 자막 위치 (style)
             children: [
-              for (int i = 0; i < languages.length; i++)  // 자막 갯수 제한 !!!!!!
+              for (int i = 0; i < languages.length; i++)  // 자막 갯수 제한 !!!!!! (나중에)
                 Column(
                   children: [
                     SizedBox(height: 15 * scaleFactor),   // 자막 간 간격 지정

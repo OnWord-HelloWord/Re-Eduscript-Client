@@ -3,13 +3,16 @@
 
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:re_eduscript_client/widgets/about_preview_setup_screen/platform_menu_bar_widget.dart';
 import 'package:window_manager/window_manager.dart';
 import 'package:re_eduscript_client/providers/mode_provider.dart'; // [providers]
 import 'package:re_eduscript_client/providers/language_settings_provider.dart';
 import 'package:re_eduscript_client/providers/language_mapping_provider.dart';
 import 'package:re_eduscript_client/providers/subtitle_style_provider.dart';
 import 'package:re_eduscript_client/core/styles/app_sizes.dart';  // [cores]                               // [AppSizes] 최소 창 크기
-import 'package:re_eduscript_client/screens/start_screen.dart';   // [screens]
+import 'package:re_eduscript_client/screens/start_screen.dart';
+
+import 'core/constants/app_enums.dart';   // [screens]
 
 void main() async {
   // [창 관리자 관련] (Window Manager)
@@ -59,10 +62,19 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,  // 디버깅 모드
-      title: 'EduScript',                 // 제목
-      home: const StartScreen(),          // 시작 화면 전환
+    // 모드 콜백
+    final mode = context.read<ModeProvider>();
+    final onLectureMode = () => mode.setMode(Mode.lecture);
+    final onConferenceMode = () => mode.setMode(Mode.conference);
+
+    return PlatformMenuBarWidget(
+      onSelectLectureMode: onLectureMode,
+      onSelectConferenceMode: onConferenceMode,
+      child: MaterialApp(
+        debugShowCheckedModeBanner: false,  // 디버깅 모드
+        title: 'EduScript',                 // 제목
+        home: const StartScreen(),          // 시작 화면 전환
+      ),
     );
   }
 }
