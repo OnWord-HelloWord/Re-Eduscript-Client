@@ -18,6 +18,7 @@ class FontColorDropdown extends StatelessWidget {
       onChanged: (String newColor) {          // 상태 변화
         styles.updateFontColor(newColor);
       },
+      isColorDropdown: true,                  // 드롭다운에 색상 원 표시
     );
   }
 }
