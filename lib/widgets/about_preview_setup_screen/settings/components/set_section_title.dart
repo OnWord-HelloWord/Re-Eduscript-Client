@@ -1,5 +1,5 @@
-// []
-// [settings] 섹션 타이틀
+// [widgets/about_preview_setup_screen/settings/components/set_section_title.dart]
+// [섹션 타이틀]
 
 import 'package:flutter/material.dart';
 import 'package:re_eduscript_client/core/styles/app_colors.dart';    // [cores] 색상

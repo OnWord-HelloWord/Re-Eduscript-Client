@@ -1,3 +1,6 @@
+// [widgets/about_preview_setup_screen/settings/dropdowns/font_style_dropdown.dart]
+// [자막 설정 드롭다운 - 폰트 스타일]
+
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:re_eduscript_client/providers/subtitle_style_provider.dart'; // [provider] 자막 스타일

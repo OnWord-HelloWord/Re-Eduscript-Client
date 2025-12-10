@@ -1,3 +1,6 @@
+// [widgets/about_preview_setup_screen/settings/components/onoff_switch_widget.dart]
+// [ON/OFF 스위치 위젯]
+
 library;
 import 'package:flutter/material.dart';
 

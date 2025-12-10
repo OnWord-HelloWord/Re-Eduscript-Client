@@ -1,4 +1,5 @@
-// [widgets] 다이얼로그 창 - 라디오박스 위젯 (단일 선택)
+// [widgets/about_preview_setup_screen/settings/language_dialog/language_radiobox_tile_widget.dart]
+// [언어 선택 다이얼로그 창 - 라디오박스 위젯 (단일 선택)]
 
 import 'package:flutter/material.dart';
 import 'package:re_eduscript_client/core/styles/app_colors.dart'; // [cores] 색상

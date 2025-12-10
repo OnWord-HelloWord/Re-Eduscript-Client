@@ -1,5 +1,5 @@
-// []
-// [widgets] 언어 선택 드롭다운
+// [widgets/about_preview_setup_screen/settings/dropdowns/language_selection_dropdown.dart]
+// [자막 설정 - 언어 선택 (입출력)]
 
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';

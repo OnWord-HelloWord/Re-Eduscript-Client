@@ -1,4 +1,5 @@
-// [대기화면 -> 자막 스타일 -> 화면 공유 섹션]
+// [widgets/about_preview_setup_screen/settings/screen_shared_status_section.dart]
+// [대기화면 -> 자막 스타일 -> 화면 공유 섹션 (ON/OFF 선택)]
 
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -10,8 +11,8 @@ import 'package:re_eduscript_client/widgets/about_preview_setup_screen/settings/
 import 'package:re_eduscript_client/widgets/about_preview_setup_screen/settings/components/onoff_switch_widget.dart'; // [widgets] ON/OFF 위젯
 import 'package:re_eduscript_client/widgets/about_preview_setup_screen/settings/components/setting_item_wrapper.dart';  // [widgets] 이름 + 드롭다운 랩퍼
 
-class SubtitleOnlyStatusSection extends StatelessWidget {
-  const SubtitleOnlyStatusSection({super.key});
+class ScreenSharedStatusSection extends StatelessWidget {
+  const ScreenSharedStatusSection({super.key});
 
   @override
   Widget build(BuildContext context) {

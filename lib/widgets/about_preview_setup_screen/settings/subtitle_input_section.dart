@@ -1,4 +1,4 @@
-// []
+// [widgets/about_preview_setup_screen/settings/subtitle_input_section.dart]
 // [대기화면 -> 자막 스타일 -> 입력 언어 섹션]
 
 import 'package:flutter/material.dart';
@@ -11,8 +11,8 @@ import 'package:re_eduscript_client/widgets/about_preview_setup_screen/settings/
 import 'package:re_eduscript_client/widgets/about_preview_setup_screen/settings/components/setting_item_wrapper.dart';          // [widgets] 이름 + 드롭다운 랩퍼
 import 'package:re_eduscript_client/widgets/about_preview_setup_screen/settings/dropdowns/language_selection_dropdown.dart';    // [widgets] 드롭다운
 
-class SubtitlesOnlyInputSection extends StatelessWidget {
-  const SubtitlesOnlyInputSection({super.key});
+class SubtitleInputSection extends StatelessWidget {
+  const SubtitleInputSection({super.key});
 
   @override
   Widget build(BuildContext context) {

@@ -60,7 +60,7 @@ class SubtitleStyleProvider extends ChangeNotifier {
   void updateScreenShareedEnabled(bool enabled) {
     _screenSharedEnabled = enabled; // 화면 공유 ON
     notifyListeners();              // UI 업데이트
-    debugPrint("[Provider] 화면 공유 모드 : $screenSharedEnabled");
+    debugPrint("[화면 공유 상태] $screenSharedEnabled");
   }
 
   // 2) 자막 세로 정렬 변경

@@ -57,6 +57,7 @@ class AppSizes {
   static const double previewIconSize = 20.0;           // 아이콘 크기
 
   // < 자막 설정 >
-  static const double containerRadius = 7.0;
+  static const double backContainerRadius = 6.0;
+  static const double itemWrapperRadius = 6.0;
   static const double dropdownIconSize = 24.0;
 }

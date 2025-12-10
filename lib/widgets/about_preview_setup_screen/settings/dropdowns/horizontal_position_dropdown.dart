@@ -1,3 +1,6 @@
+// [widgets/about_preview_setup_screen/settings/dropdowns/horizontal_position_dropdown.dart]
+// [자막 설정 드롭다운 - 가로 정렬]
+
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:re_eduscript_client/providers/subtitle_style_provider.dart'; // [provider] 자막 스타일

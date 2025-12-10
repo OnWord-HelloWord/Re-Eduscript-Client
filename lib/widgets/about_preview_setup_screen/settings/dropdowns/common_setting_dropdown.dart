@@ -1,3 +1,6 @@
+// [widgets/about_preview_setup_screen/settings/dropdowns/common_setting_dropdown.dart]
+// [자막 설정 드롭다운 (공통 위젯)]
+
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:re_eduscript_client/core/styles/app_sizes.dart';  // [cores] 사이즈

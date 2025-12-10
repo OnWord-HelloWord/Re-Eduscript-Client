@@ -156,6 +156,36 @@ class LanguageMappingProvider extends ChangeNotifier {
         return 'こんにちは！テスト字幕です。';
       case '중국어':
         return '你好！这是测试字幕。';
+      case '독일어':
+        return 'Hallo! Dies ist ein Test-Untertitel.';
+      case '프랑스어':
+        return 'Bonjour! Ceci est un sous-titre de test.';
+      case '스페인어':
+        return '¡Hola! Este es un subtítulo de prueba.';
+      case '이탈리아어':
+        return 'Ciao! Questo è un sottotitolo di prova.';
+      case '러시아어':
+        return 'Привет! Это тестовые субтитры.';
+      case '포르투갈어':
+        return 'Olá! Esta é uma legenda de teste.';
+      case '아랍어':
+        return 'مرحبا! هذه ترجمة تجريبية.';
+      case '힌디어':
+        return 'नमस्ते! यह एक परीक्षण उपशीर्षक है।';
+      case '태국어':
+        return 'สวัสดี! นี่คือคำบรรยายทดสอบ';
+      case '인도네시아어':
+        return 'Halo! Ini adalah subtitle uji coba.';
+      case '네덜란드어':
+        return 'Hallo! Dit is een test ondertitel.';
+      case '폴란드어':
+        return 'Cześć! To jest testowy napis.';
+      case '스웨덴어':
+        return 'Hej! Detta är en testundertext.';
+      case '핀란드어':
+        return 'Hei! Tämä on testi tekstitys.';
+      case '덴마크어':
+        return 'Hej! Dette er en test undertekst.';
       default:
         return '안녕하세요! 텍스트 자막입니다.';
     }

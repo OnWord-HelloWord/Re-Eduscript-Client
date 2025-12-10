@@ -1,3 +1,5 @@
+// [widgets/about_preview_setup_screen/settings/language_dialog/set_languages_button_widget.dart]
+// [언어 선택 다이얼로그 창 - 취소, 확인 버튼 위젯]
 
 import 'package:flutter/material.dart';
 

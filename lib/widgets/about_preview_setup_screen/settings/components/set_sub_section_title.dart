@@ -1,3 +1,5 @@
+// [widgets/about_preview_setup_screen/settings/components/set_sub_section_title.dart]
+// [서브 섹션 타이틀]
 
 import 'package:flutter/material.dart';
 import 'package:re_eduscript_client/core/styles/app_sizes.dart';  // [cores] 사이즈

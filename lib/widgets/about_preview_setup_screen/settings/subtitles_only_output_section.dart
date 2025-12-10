@@ -1,4 +1,5 @@
-// [대기화면 -> 자막 스타일 -> 출력 언어 섹션]
+// [widgets/about_preview_setup_screen/settings/screen_shared_status_section.dart]
+// [대기화면 -> 자막 스타일 설정 -> 출력 언어 섹션 (화면 공유 OFF)]
 
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -9,19 +10,17 @@ import 'package:re_eduscript_client/widgets/about_preview_setup_screen/settings/
 import 'package:re_eduscript_client/widgets/about_preview_setup_screen/settings/components/settings_background_container.dart'; // [widgets] 배경 컨테이너
 import 'package:re_eduscript_client/widgets/about_preview_setup_screen/settings/components/setting_item_wrapper.dart';          // [widgets] 이름 + 드롭다운 랩퍼
 import 'package:re_eduscript_client/widgets/about_preview_setup_screen/settings/components/section_divider.dart';               // [widgets] 구분선
-import 'package:re_eduscript_client/widgets/about_preview_setup_screen/settings/dropdowns/horizontal_position_dropdown.dart';
 import 'package:re_eduscript_client/widgets/about_preview_setup_screen/settings/dropdowns/language_selection_dropdown.dart';    // [widgets] 드롭다운
 import 'package:re_eduscript_client/widgets/about_preview_setup_screen/settings/dropdowns/vertical_position_dropdown.dart';
-import 'package:re_eduscript_client/widgets/about_preview_setup_screen/settings/dropdowns/font_style_dropdown.dart';
 import 'package:re_eduscript_client/widgets/about_preview_setup_screen/settings/dropdowns/font_size_dropdown.dart';
 import 'package:re_eduscript_client/widgets/about_preview_setup_screen/settings/dropdowns/font_color_dropdown.dart';
 import 'package:re_eduscript_client/widgets/about_preview_setup_screen/settings/dropdowns/font_background_color_dropdown.dart';
 import 'package:re_eduscript_client/widgets/about_preview_setup_screen/settings/dropdowns/font_background_opacity_dropdown.dart';
 
-import '../components/set_sub_section_wrapper.dart';
+import 'components/set_sub_section_wrapper.dart';
 
-class ScreenSharedOutputSection extends StatelessWidget {
-  const ScreenSharedOutputSection({super.key});
+class SubtitlesOnlyOutputSection extends StatelessWidget {
+  const SubtitlesOnlyOutputSection({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -62,7 +61,7 @@ class ScreenSharedOutputSection extends StatelessWidget {
                       // 드롭다운
                       SettingItemWrapper(child: VerticalPositionDropdown()),
                       const SectionDivider(), // 구분선
-                      SettingItemWrapper(child: HorizontalPositionDropdown()),
+                      SettingItemWrapper(child: FontSizeDropdown()),
                     ],
                   ),
                 ),
@@ -75,6 +74,22 @@ class ScreenSharedOutputSection extends StatelessWidget {
                     children: [
                       // 드롭다운
                       SettingItemWrapper(child: FontSizeDropdown()),
+                      const SectionDivider(), // 구분선
+                      SettingItemWrapper(child: FontColorDropdown()),
+                    ],
+                  ),
+                ),
+                const SizedBox(height: 20),
+
+                // 자막 배경 섹션
+                SetSubSectionWrapper(
+                  title: AppTitles.backgroundSubSectionTitle, // 서브 섹션 타이틀
+                  content: Column(
+                    children: [
+                      // 드롭다운
+                      SettingItemWrapper(child: FontBackgroundColorDropdown()),
+                      const SectionDivider(), // 구분선
+                      SettingItemWrapper(child: FontBackgroundOpacityDropdown()),
                     ],
                   ),
                 ),

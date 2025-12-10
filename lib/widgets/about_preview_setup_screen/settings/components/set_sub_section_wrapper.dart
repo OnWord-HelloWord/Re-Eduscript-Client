@@ -1,5 +1,5 @@
-// []
-// [settings]
+// [widgets/about_preview_setup_screen/settings/components/set_sub_section_wrapper.dart]
+// [서브 섹션 래퍼..?]
 
 import 'package:flutter/material.dart';
 import 'package:re_eduscript_client/core/styles/app_sizes.dart';  // [cores] 사이즈

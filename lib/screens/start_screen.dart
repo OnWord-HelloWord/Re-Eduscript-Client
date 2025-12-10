@@ -35,7 +35,7 @@ class _StartScreenState extends State<StartScreen> {
   void _onModeSelected(Mode mode) {
     // [프로바이더] 모드 할당
     Provider.of<ModeProvider>(context, listen: false).setMode(mode);
-    debugPrint("[Screen] 현재 선택된 모드 : ${mode.name}");
+    debugPrint("[현재 모드] ${mode.name} 모드");
 
     // 🔴 파일에 모드 할당 하기 (나중에) 🔴
 

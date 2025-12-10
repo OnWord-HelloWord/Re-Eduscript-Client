@@ -1,5 +1,5 @@
-// []
-// [widgets] 다이얼로그 창 - 체크박스 위젯 (다중 선택)
+// [widgets/about_preview_setup_screen/settings/language_dialog/language_checkbox_tile_widget.dart]
+// [언어 선택 다이얼로그 창 - 체크박스 위젯 (다중 선택)]
 
 import 'package:flutter/material.dart';
 import 'package:re_eduscript_client/core/styles/app_colors.dart'; // [cores] 색상
