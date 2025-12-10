@@ -8,8 +8,7 @@ import 'package:re_eduscript_client/providers/subtitle_style_provider.dart';
 import 'package:re_eduscript_client/widgets/about_preview_setup_screen/playbar/playbar_content.dart';
 import 'package:re_eduscript_client/widgets/about_preview_setup_screen/preview/preview_screen_shared_content.dart';
 import 'package:re_eduscript_client/widgets/about_preview_setup_screen/preview/preview_subtitle_only_content.dart';
-import 'package:re_eduscript_client/widgets/about_preview_setup_screen/settings/settings_screen_shared_content.dart';
-import 'package:re_eduscript_client/widgets/about_preview_setup_screen/settings/settings_subtitle_only_content.dart'; // [providers] 화면 공유 상태
+import 'package:re_eduscript_client/widgets/about_preview_setup_screen/settings/subtitle_setting_content.dart';
 
 class PreviewSectionContent extends StatelessWidget {
   final PreviewSectionType sectionType;
@@ -47,14 +46,7 @@ class PreviewSectionContent extends StatelessWidget {
 
       // [3] 자막 설정 화면
       case PreviewSectionType.settings:
-        // - 화면 공유 ON
-        if (subtitleStyle.screenSharedEnabled) {
-          return SettingsScreenSharedContent();
-        }
-        // - 화면 공유 OFF
-        else {
-          return SettingsSubtitleOnlyContent();
-        }
+        return SubtitleSettingContent();
     }
   }
 }
