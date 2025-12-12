@@ -36,7 +36,7 @@ class PreviewSectionContent extends StatelessWidget {
 
       // [2] 플레이바 (재생 버튼) 섹션
       case PreviewSectionType.playbar:
-        return PlaybarContent();
+        return PlaybarContent(screenWidth: screenWidth, screenHeight: screenHeight,);
 
       // [3] 자막 설정 화면
       case PreviewSectionType.settings:
