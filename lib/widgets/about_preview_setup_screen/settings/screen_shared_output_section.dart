@@ -13,12 +13,7 @@ import 'package:re_eduscript_client/widgets/about_preview_setup_screen/settings/
 import 'package:re_eduscript_client/widgets/about_preview_setup_screen/settings/dropdowns/horizontal_position_dropdown.dart';
 import 'package:re_eduscript_client/widgets/about_preview_setup_screen/settings/dropdowns/language_selection_dropdown.dart';    // [widgets] 드롭다운
 import 'package:re_eduscript_client/widgets/about_preview_setup_screen/settings/dropdowns/vertical_position_dropdown.dart';
-import 'package:re_eduscript_client/widgets/about_preview_setup_screen/settings/dropdowns/font_style_dropdown.dart';
 import 'package:re_eduscript_client/widgets/about_preview_setup_screen/settings/dropdowns/font_size_dropdown.dart';
-import 'package:re_eduscript_client/widgets/about_preview_setup_screen/settings/dropdowns/font_color_dropdown.dart';
-import 'package:re_eduscript_client/widgets/about_preview_setup_screen/settings/dropdowns/font_background_color_dropdown.dart';
-import 'package:re_eduscript_client/widgets/about_preview_setup_screen/settings/dropdowns/font_background_opacity_dropdown.dart';
-
 import 'components/set_sub_section_wrapper.dart';
 
 class ScreenSharedOutputSection extends StatelessWidget {

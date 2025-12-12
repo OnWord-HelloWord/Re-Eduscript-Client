@@ -19,10 +19,10 @@ class AppColors {
   static const Color blueLightColor = Color(0xFF2196F3);     // (버튼) 살짝 연한 파란색
 
   // 빨간색
-  //static const Color redColor = Color(0xFFEF4444);
+  static const Color redColor = Color(0xFFEF4444);
 
   // 초록색
-  //static const Color greenColor = Color(0xFF45CE78);
+  static const Color greenColor = Color(0xFF45CE78);
 
   // 회색
   static const Color greyColor = Color(0xFF7C7C7C);

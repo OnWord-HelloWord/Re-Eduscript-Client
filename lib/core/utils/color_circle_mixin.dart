@@ -1,7 +1,6 @@
 // [색상, 투명도 원 그리기]
 
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 import 'package:re_eduscript_client/providers/subtitle_style_provider.dart';
 
 mixin ColorCircleMixin {

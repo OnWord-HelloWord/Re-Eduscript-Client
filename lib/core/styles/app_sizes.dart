@@ -55,9 +55,10 @@ class AppSizes {
   // < 대기 화면 >
   static const double previewTitleSize = 18.0;          // 제목 크기
   static const double previewIconSize = 20.0;           // 아이콘 크기
+  static const double previewScreenContainerRadius = 8.0;
 
   // < 자막 설정 >
-  static const double backContainerRadius = 6.0;
+  static const double backContainerRadius = 8.0;
   static const double itemWrapperRadius = 6.0;
   static const double dropdownIconSize = 24.0;
 }
